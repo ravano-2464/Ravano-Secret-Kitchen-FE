@@ -44,10 +44,6 @@ export const useLogin = (): UseLoginReturn => {
         throw new Error(data.message || 'Login gagal');
       }
 
-      // Assuming the backend returns { token, user: { ... } } or similar
-      // Adjust based on actual backend response if needed. 
-      // Based on auth controller it usually returns token. 
-      // I'll assume standard JWT response structure.
       login(data.token, data.user || { name: 'User', email }); 
 
     } catch (err: any) {

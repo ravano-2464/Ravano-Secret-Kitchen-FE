@@ -148,7 +148,6 @@ export const RecipeDetailPage = () => {
                         )}
                     </div>
 
-                    {/* Tips section always visible at bottom */}
                     {recipe.tips && recipe.tips.length > 0 && (
                         <div className="tips-card">
                             <h3 className="tips-title">
