@@ -1,0 +1,66 @@
+.home-page {
+  min-height: 100vh;
+}
+
+.home-main {
+  padding: 0 2rem 2rem;
+}
+
+.home-hero {
+  text-align: center;
+  padding: 3rem 0 2rem;
+  background: linear-gradient(180deg, #fef3ee 0%, transparent 100%);
+  margin: 0 -2rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+.home-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--gray-900);
+  margin-bottom: 0.5rem;
+}
+
+.home-subtitle {
+  color: var(--gray-500);
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.home-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-top: 2rem;
+}
+
+.recipe-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.no-results {
+  text-align: center;
+  padding: 3rem;
+  color: var(--gray-500);
+}
+
+@media (max-width: 768px) {
+  .home-main {
+    padding: 0 1rem 1rem;
+  }
+
+  .home-hero {
+    margin: 0 -1rem;
+    padding: 2rem 1rem;
+  }
+
+  .home-title {
+    font-size: 1.5rem;
+  }
+
+  .recipe-grid {
+    grid-template-columns: 1fr;
+  }
+}
