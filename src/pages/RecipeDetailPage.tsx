@@ -130,9 +130,20 @@ export const RecipeDetailPage = () => {
                                     <PlayCircle size={20} className="video-icon" />
                                     Video Tutorial
                                 </h3>
-                                <p className="video-placeholder">
-                                    Video tutorial belum tersedia untuk resep ini
-                                </p>
+                                {recipe.videoUrl ? (
+                                    <div className="video-container">
+                                        <iframe
+                                            src={`https://www.youtube.com/embed/${recipe.videoUrl.split('v=')[1]?.split('&')[0]}`}
+                                            title={recipe.title}
+                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                            allowFullScreen
+                                        ></iframe>
+                                    </div>
+                                ) : (
+                                    <p className="video-placeholder">
+                                        Video tutorial belum tersedia untuk resep ini
+                                    </p>
+                                )}
                             </div>
                         )}
                     </div>

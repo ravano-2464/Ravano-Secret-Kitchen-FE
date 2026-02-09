@@ -256,6 +256,25 @@
 }
 
 /* Tips Card - Always visible at bottom */
+.video-container {
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+  height: 0;
+  overflow: hidden;
+  border-radius: 12px;
+  background: var(--gray-100);
+  margin-top: 1rem;
+}
+
+.video-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
 .tips-card {
   background: #fef7ed;
   border-radius: 12px;
