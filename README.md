@@ -23,6 +23,7 @@
 | 🔍 **Pencarian** | Cari resep berdasarkan nama atau deskripsi |
 | 🏷️ **Kategori** | Filter resep: Masakan Utama, Berkuah, Sayuran, Kue & Camilan |
 | 📖 **Detail Resep** | Bahan-bahan, Cara Membuat, Tips & Trik |
+| 🌐 **API Integration** | Mengambil data resep dari Backend (MongoDB) |
 | 📱 **Responsif** | Tampilan optimal di desktop & mobile |
 
 ---
@@ -37,7 +38,6 @@
 
 ## 🚀 Instalasi
 
-```bash
 # Clone repository
 git clone <repository-url>
 
@@ -47,9 +47,15 @@ cd Frontend
 # Install dependencies
 npm install
 
+# Setup Environment Variables
+# Buat file .env dan tambahkan URL API Backend
+echo "VITE_API_URL=http://localhost:5000/api" > .env
+
 # Jalankan development server
 npm run dev
-```
+
+# Pastikan Backend server juga berjalan!
+# cd ../Backend && npm run dev
 
 Buka http://localhost:5173 di browser Anda.
 
@@ -57,48 +63,60 @@ Buka http://localhost:5173 di browser Anda.
 
 ## 📁 Struktur Proyek
 
-```
 Frontend/
-├── 📄 index.html
-├── 📄 package.json
-├── 📄 vite.config.ts
-├── 📄 tsconfig.json
+├── 📂 public/
+│   └── 📄 vite.svg              # Vite logo
+├── 📂 src/
+│   ├── 📂 assets/               # Static assets
+│   │   └── 📄 react.svg         # React logo
+│   │
+│   ├── 📂 components/           # Reusable components
+│   │   ├── 📄 CategoryFilter.css
+│   │   ├── 📄 CategoryFilter.tsx # Filter kategori
+│   │   ├── 📄 Navbar.css
+│   │   ├── 📄 Navbar.tsx        # Navigation bar (sticky)
+│   │   ├── 📄 ProtectedRoute.tsx # Route guard untuk halaman privat
+│   │   ├── 📄 RecipeCard.css
+│   │   ├── 📄 RecipeCard.tsx    # Komponen kartu resep
+│   │   ├── 📄 SearchBar.css
+│   │   └── 📄 SearchBar.tsx     # Komponen pencarian
+│   │
+│   ├──📂 context/              # Context Providers
+│   │   └── 📄 AuthContext.tsx   # Authentication context & provider
+│   │
+│   ├── 📂 hooks/                # Custom React Hooks
+│   │   ├── 📄 useLogin.ts       # Logika login
+│   │   ├── 📄 useRecipeDetail.ts # Logika detail resep
+│   │   ├── 📄 useRecipes.ts     # Logika fetching resep
+│   │   └── 📄 useRegister.ts    # Logika registrasi
+│   │
+│   ├── 📂 pages/                # Halaman aplikasi
+│   │   ├── 📄 HomePage.css
+│   │   ├── 📄 HomePage.tsx      # Halaman utama
+│   │   ├── 📄 LoginPage.css
+│   │   ├── 📄 LoginPage.tsx     # Halaman login
+│   │   ├── 📄 RecipeDetailPage.css
+│   │   ├── 📄 RecipeDetailPage.tsx  # Halaman detail resep
+│   │   └── 📄 RegisterPage.tsx  # Halaman registrasi
+│   │
+│   ├── 📂 types/                # TypeScript Interfaces
+│   │   └── 📄 Recipe.ts         # Definisi tipe data Resep
+│   │
+│   ├── 📄 App.tsx               # Konfigurasi Routing
+│   ├── 📄 index.css             # Global styles
+│   ├── 📄 main.tsx              # Entry point aplikasi
+│   └── 📄 vite-env.d.ts         # Vite types
 │
-└── 📂 src/
-    ├── 📄 main.tsx              # Entry point
-    ├── 📄 App.tsx               # Router setup
-    ├── 📄 index.css             # Global styles
-    │
-    ├── 📂 components/           # Reusable components
-    │   ├── 📄 Navbar.tsx        # Navigation bar (sticky)
-    │   ├── 📄 Navbar.css
-    │   ├── 📄 RecipeCard.tsx    # Card resep
-    │   ├── 📄 RecipeCard.css
-    │   ├── 📄 SearchBar.tsx     # Input pencarian
-    │   ├── 📄 SearchBar.css
-    │   ├── 📄 CategoryFilter.tsx # Filter kategori
-    │   └── 📄 CategoryFilter.css
-    │
-    ├── 📂 pages/                # Halaman aplikasi
-    │   ├── 📄 LoginPage.tsx     # Halaman login
-    │   ├── 📄 LoginPage.css
-    │   ├── 📄 RegisterPage.tsx  # Halaman registrasi
-    │   ├── 📄 HomePage.tsx      # Halaman utama
-    │   ├── 📄 HomePage.css
-    │   ├── 📄 RecipeDetailPage.tsx  # Detail resep
-    │   └── 📄 RecipeDetailPage.css
-    │
-    ├── 📂 hooks/                # Custom React Hooks
-    │   ├── 📄 useLogin.ts       # Hook untuk login
-    │   ├── 📄 useRegister.ts    # Hook untuk register
-    │   ├── 📄 useRecipes.ts     # Hook untuk list resep
-    │   └── 📄 useRecipeDetail.ts # Hook untuk detail resep
-    │
-    ├── 📂 data/                 # Mock data
-    │   └── 📄 recipes.ts        # Data resep Indonesia
-    │
-    └── 📂 assets/               # Static assets
-```
+├── 📄 .env                      # Environment variables
+├── 📄 .gitignore                # Git ignore rules
+├── 📄 eslint.config.js          # ESLint configuration
+├── 📄 index.html                # HTML entry point
+├── 📄 package.json              # Project dependencies & scripts
+├── 📄 package-lock.json         # Lock file dependencies
+├── 📄 tsconfig.json             # TypeScript root config
+├── 📄 tsconfig.app.json         # TypeScript app config
+├── 📄 tsconfig.node.json        # TypeScript node config
+└── 📄 vite.config.ts            # Vite configuration
 
 ---
 
@@ -108,7 +126,7 @@ Frontend/
 |------|---------|-----------|
 | `/login` | LoginPage | Form login user |
 | `/register` | RegisterPage | Form registrasi user baru |
-| `/` | HomePage | Daftar resep dengan filter |
+| `/home` | HomePage | Daftar resep dengan filter |
 | `/recipe/:id` | RecipeDetailPage | Detail lengkap resep |
 
 ---
@@ -165,6 +183,8 @@ npm run preview  # Preview production build
 ---
 
 ## 🍽️ Resep yang Tersedia
+
+*> Catatan: Daftar ini adalah contoh data awal yang di-seed ke database.*
 
 - 🥘 **Rendang Daging Sapi** - Masakan Utama
 - 🍳 **Nasi Goreng Kampung** - Masakan Utama

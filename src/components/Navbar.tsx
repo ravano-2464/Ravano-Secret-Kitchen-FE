@@ -1,16 +1,15 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { LogOut, ChefHat } from 'lucide-react';
+import { useAuth } from '../context/AuthContext';
 import './Navbar.css';
 
 export const Navbar = () => {
-    const navigate = useNavigate();
+    const { user, logout } = useAuth();
 
-    const userName = localStorage.getItem('userName') || 'User';
+    const userName = user?.name || 'User';
 
     const handleLogout = () => {
-        localStorage.removeItem('isLoggedIn');
-        localStorage.removeItem('userName');
-        navigate('/login');
+        logout();
     };
 
     return (

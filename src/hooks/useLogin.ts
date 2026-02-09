@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 
 interface UseLoginReturn {
   email: string;
@@ -16,7 +16,7 @@ export const useLogin = (): UseLoginReturn => {
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  const navigate = useNavigate();
+  const { login } = useAuth();
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -28,14 +28,33 @@ export const useLogin = (): UseLoginReturn => {
     }
 
     setLoading(true);
-    
-    setTimeout(() => {
+
+    try {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/auth/login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || 'Login gagal');
+      }
+
+      // Assuming the backend returns { token, user: { ... } } or similar
+      // Adjust based on actual backend response if needed. 
+      // Based on auth controller it usually returns token. 
+      // I'll assume standard JWT response structure.
+      login(data.token, data.user || { name: 'User', email }); 
+
+    } catch (err: any) {
+      setError(err.message || 'Terjadi kesalahan saat login');
+    } finally {
       setLoading(false);
-      localStorage.setItem('isLoggedIn', 'true');
-      const userName = email.split('@')[0];
-      localStorage.setItem('userName', userName);
-      navigate('/');
-    }, 1000);
+    }
   };
 
   return {

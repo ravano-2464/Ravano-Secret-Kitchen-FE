@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Clock, Users } from 'lucide-react';
-import type { Recipe } from '../data/recipes';
+import type { Recipe } from '../types/Recipe';
 import './RecipeCard.css';
 
 interface RecipeCardProps {

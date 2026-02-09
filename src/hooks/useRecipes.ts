@@ -1,6 +1,5 @@
-import { useState, useMemo } from 'react';
-import { recipes, categories } from '../data/recipes';
-import type { Recipe } from '../data/recipes';
+import { useState, useMemo, useEffect } from 'react';
+import type { Recipe } from '../types/Recipe';
 
 interface UseRecipesReturn {
   recipes: Recipe[];
@@ -9,14 +8,44 @@ interface UseRecipesReturn {
   activeCategory: string;
   searchQuery: string;
   loading: boolean;
+  error: string;
   setActiveCategory: (category: string) => void;
   setSearchQuery: (query: string) => void;
 }
 
 export const useRecipes = (): UseRecipesReturn => {
+  const [recipes, setRecipes] = useState<Recipe[]>([]);
   const [activeCategory, setActiveCategory] = useState('Semua');
   const [searchQuery, setSearchQuery] = useState('');
-  const [loading] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
+
+  useEffect(() => {
+    const fetchRecipes = async () => {
+      try {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/recipes`);
+        const data = await response.json();
+        
+        if (response.ok) {
+           setRecipes(data.data || []);
+        } else {
+           setError('Gagal memuat resep');
+        }
+      } catch (err) {
+        setError('Terjadi kesalahan koneksi');
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchRecipes();
+  }, []);
+
+  const categories = useMemo(() => {
+    const cats = Array.from(new Set(recipes.map(r => r.category)));
+    return ['Semua', ...cats];
+  }, [recipes]);
 
   const filteredRecipes = useMemo(() => {
     let result = recipes;
@@ -34,7 +63,7 @@ export const useRecipes = (): UseRecipesReturn => {
     }
 
     return result;
-  }, [activeCategory, searchQuery]);
+  }, [recipes, activeCategory, searchQuery]);
 
   return {
     recipes,
@@ -43,6 +72,7 @@ export const useRecipes = (): UseRecipesReturn => {
     activeCategory,
     searchQuery,
     loading,
+    error,
     setActiveCategory,
     setSearchQuery,
   };

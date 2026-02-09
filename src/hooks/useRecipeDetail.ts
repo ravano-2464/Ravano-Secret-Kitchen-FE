@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { recipes } from '../data/recipes';
-import type { Recipe } from '../data/recipes';
+import type { Recipe } from '../types/Recipe';
 
 type TabType = 'ingredients' | 'instructions' | 'video';
 
@@ -9,6 +8,7 @@ interface UseRecipeDetailReturn {
   recipe: Recipe | null;
   activeTab: TabType;
   loading: boolean;
+  error: string;
   setActiveTab: (tab: TabType) => void;
   goBack: () => void;
 }
@@ -19,12 +19,29 @@ export const useRecipeDetail = (): UseRecipeDetailReturn => {
   const [recipe, setRecipe] = useState<Recipe | null>(null);
   const [activeTab, setActiveTab] = useState<TabType>('ingredients');
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
 
   useEffect(() => {
-    setLoading(true);
-    const foundRecipe = recipes.find(r => r.id === id);
-    setRecipe(foundRecipe || null);
-    setLoading(false);
+    const fetchRecipe = async () => {
+        if (!id) return;
+        setLoading(true);
+        try {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/recipes/${id}`);
+            const data = await response.json();
+            if (response.ok) {
+                setRecipe(data.data);
+            } else {
+                setError('Resep tidak ditemukan');
+            }
+        } catch (err) {
+            setError('Terjadi kesalahan koneksi');
+            console.error(err);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    fetchRecipe();
   }, [id]);
 
   const goBack = () => {
@@ -35,6 +52,7 @@ export const useRecipeDetail = (): UseRecipeDetailReturn => {
     recipe,
     activeTab,
     loading,
+    error,
     setActiveTab,
     goBack,
   };

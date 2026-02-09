@@ -33,6 +33,7 @@ export const useRegister = (): UseRegisterReturn => {
       return;
     }
 
+
     if (password.length < 6) {
       setError('Password minimal 6 karakter');
       return;
@@ -45,10 +46,27 @@ export const useRegister = (): UseRegisterReturn => {
 
     setLoading(true);
 
-    setTimeout(() => {
-      setLoading(false);
+    try {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/auth/register`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ name, email, password }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || 'Registrasi gagal');
+      }
+
       navigate('/login');
-    }, 1000);
+    } catch (err: any) {
+      setError(err.message || 'Terjadi kesalahan saat registrasi');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return {
