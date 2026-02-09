@@ -29,11 +29,9 @@ export const useLogin = (): UseLoginReturn => {
 
     setLoading(true);
     
-    // Simulate login
     setTimeout(() => {
       setLoading(false);
       localStorage.setItem('isLoggedIn', 'true');
-      // Extract name from email (before @) for display
       const userName = email.split('@')[0];
       localStorage.setItem('userName', userName);
       navigate('/');

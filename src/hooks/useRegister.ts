@@ -45,7 +45,6 @@ export const useRegister = (): UseRegisterReturn => {
 
     setLoading(true);
 
-    // Simulate registration
     setTimeout(() => {
       setLoading(false);
       navigate('/login');

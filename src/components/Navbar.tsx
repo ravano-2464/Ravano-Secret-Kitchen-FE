@@ -5,7 +5,6 @@ import './Navbar.css';
 export const Navbar = () => {
     const navigate = useNavigate();
 
-    // Get user name from localStorage (set during login)
     const userName = localStorage.getItem('userName') || 'User';
 
     const handleLogout = () => {

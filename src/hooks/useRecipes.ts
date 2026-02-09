@@ -21,12 +21,10 @@ export const useRecipes = (): UseRecipesReturn => {
   const filteredRecipes = useMemo(() => {
     let result = recipes;
 
-    // Filter by category
     if (activeCategory !== 'Semua') {
       result = result.filter(recipe => recipe.category === activeCategory);
     }
 
-    // Filter by search query
     if (searchQuery.trim()) {
       const query = searchQuery.toLowerCase();
       result = result.filter(recipe =>
