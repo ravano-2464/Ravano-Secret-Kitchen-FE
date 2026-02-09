@@ -22,8 +22,7 @@ export const useRecipeDetail = (): UseRecipeDetailReturn => {
 
   useEffect(() => {
     setLoading(true);
-    const recipeId = parseInt(id || '0', 10);
-    const foundRecipe = recipes.find(r => r.id === recipeId);
+    const foundRecipe = recipes.find(r => r.id === id);
     setRecipe(foundRecipe || null);
     setLoading(false);
   }, [id]);

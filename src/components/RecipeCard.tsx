@@ -42,7 +42,7 @@ export const RecipeCard = ({ recipe }: RecipeCardProps) => {
                     </span>
                     <span className="meta-item">
                         <Users size={14} />
-                        {recipe.portions}
+                        {recipe.servings}
                     </span>
                 </div>
             </div>

@@ -1,4 +1,4 @@
-import { Header } from '../components/Header';
+import { Navbar } from '../components/Navbar';
 import { SearchBar } from '../components/SearchBar';
 import { CategoryFilter } from '../components/CategoryFilter';
 import { RecipeCard } from '../components/RecipeCard';
@@ -17,7 +17,7 @@ export const HomePage = () => {
 
     return (
         <div className="home-page">
-            <Header />
+            <Navbar />
 
             <main className="home-main">
                 <section className="home-hero">

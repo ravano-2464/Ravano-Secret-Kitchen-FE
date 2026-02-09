@@ -70,8 +70,8 @@ Frontend/
     ├── 📄 index.css             # Global styles
     │
     ├── 📂 components/           # Reusable components
-    │   ├── 📄 Header.tsx        # Navbar dengan logo
-    │   ├── 📄 Header.css
+    │   ├── 📄 Navbar.tsx        # Navigation bar (sticky)
+    │   ├── 📄 Navbar.css
     │   ├── 📄 RecipeCard.tsx    # Card resep
     │   ├── 📄 RecipeCard.css
     │   ├── 📄 SearchBar.tsx     # Input pencarian

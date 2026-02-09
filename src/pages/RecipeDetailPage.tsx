@@ -1,4 +1,4 @@
-import { ArrowLeft, Clock, Users, Lightbulb } from 'lucide-react';
+import { ArrowLeft, Clock, Users, Lightbulb, PlayCircle, ChefHat } from 'lucide-react';
 import { useRecipeDetail } from '../hooks/useRecipeDetail';
 import './RecipeDetailPage.css';
 
@@ -37,12 +37,12 @@ export const RecipeDetailPage = () => {
 
     return (
         <div className="detail-page">
-            <header className="detail-header">
+            <nav className="detail-navbar">
                 <button className="back-button" onClick={goBack}>
                     <ArrowLeft size={18} />
                     <span>Kembali</span>
                 </button>
-            </header>
+            </nav>
 
             <main className="detail-main">
                 <div className="detail-image">
@@ -67,7 +67,7 @@ export const RecipeDetailPage = () => {
                         </span>
                         <span className="meta-item">
                             <Users size={16} />
-                            {recipe.portions}
+                            {recipe.servings}
                         </span>
                     </div>
 
@@ -94,59 +94,63 @@ export const RecipeDetailPage = () => {
 
                     <div className="tab-content">
                         {activeTab === 'ingredients' && (
-                            <div className="ingredients-section">
-                                <div className="section-card">
-                                    <h3 className="section-title">
-                                        <span className="section-icon">🧂</span>
-                                        Bahan-bahan
-                                    </h3>
-                                    <ul className="ingredients-list">
-                                        {recipe.ingredients.map((ingredient, index) => (
-                                            <li key={index}>{ingredient}</li>
-                                        ))}
-                                    </ul>
-                                </div>
-
-                                <div className="tips-card">
-                                    <h3 className="tips-title">
-                                        <Lightbulb size={18} />
-                                        Tips & Trik
-                                    </h3>
-                                    <ul className="tips-list">
-                                        {recipe.tips.map((tip, index) => (
-                                            <li key={index}>{tip}</li>
-                                        ))}
-                                    </ul>
-                                </div>
+                            <div className="section-card">
+                                <h3 className="section-title">
+                                    <ChefHat size={20} className="section-icon-lucide" />
+                                    Bahan-bahan
+                                </h3>
+                                <ul className="ingredients-list">
+                                    {recipe.ingredients.map((ingredient, index) => (
+                                        <li key={index}>{ingredient}</li>
+                                    ))}
+                                </ul>
                             </div>
                         )}
 
                         {activeTab === 'instructions' && (
-                            <div className="instructions-section">
-                                <div className="section-card">
-                                    <h3 className="section-title">
-                                        <span className="section-icon">📝</span>
-                                        Cara Membuat
-                                    </h3>
-                                    <ol className="instructions-list">
-                                        {recipe.instructions.map((instruction, index) => (
-                                            <li key={index}>{instruction}</li>
-                                        ))}
-                                    </ol>
+                            <div className="section-card">
+                                <h3 className="section-title">
+                                    <ChefHat size={20} className="section-icon-lucide" />
+                                    Langkah-langkah
+                                </h3>
+                                <div className="steps-list">
+                                    {recipe.steps.map((step, index) => (
+                                        <div key={index} className="step-item">
+                                            <span className="step-number">{index + 1}</span>
+                                            <span className="step-text">{step}</span>
+                                        </div>
+                                    ))}
                                 </div>
                             </div>
                         )}
 
                         {activeTab === 'video' && (
-                            <div className="video-section">
-                                <div className="section-card">
-                                    <p className="video-placeholder">
-                                        Video tutorial belum tersedia untuk resep ini.
-                                    </p>
-                                </div>
+                            <div className="section-card">
+                                <h3 className="section-title">
+                                    <PlayCircle size={20} className="video-icon" />
+                                    Video Tutorial
+                                </h3>
+                                <p className="video-placeholder">
+                                    Video tutorial belum tersedia untuk resep ini
+                                </p>
                             </div>
                         )}
                     </div>
+
+                    {/* Tips section always visible at bottom */}
+                    {recipe.tips && recipe.tips.length > 0 && (
+                        <div className="tips-card">
+                            <h3 className="tips-title">
+                                <Lightbulb size={18} />
+                                Tips & Trik
+                            </h3>
+                            <ul className="tips-list">
+                                {recipe.tips.map((tip, index) => (
+                                    <li key={index}>{tip}</li>
+                                ))}
+                            </ul>
+                        </div>
+                    )}
                 </div>
             </main>
         </div>

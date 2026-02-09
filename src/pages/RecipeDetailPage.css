@@ -3,9 +3,16 @@
   background: var(--white);
 }
 
-.detail-header {
+/* Navbar-style header */
+.detail-navbar {
+  display: flex;
+  align-items: center;
   padding: 1rem 2rem;
   background: var(--white);
+  box-shadow: var(--shadow-sm);
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
 
 .back-button {
@@ -17,7 +24,9 @@
   border: none;
   color: var(--gray-700);
   font-size: 0.95rem;
+  font-weight: 500;
   transition: color 0.2s;
+  cursor: pointer;
 }
 
 .back-button:hover {
@@ -36,6 +45,7 @@
   margin: 0 auto 2rem;
   border-radius: 16px;
   overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
 .detail-image img {
@@ -73,22 +83,25 @@
 .badge-difficulty {
   border: 1px solid var(--gray-300);
   color: var(--gray-600);
-  background: transparent;
+  background: var(--white);
 }
 
 .badge-difficulty-easy {
   border-color: #10b981;
   color: #059669;
+  background: #ecfdf5;
 }
 
 .badge-difficulty-medium {
   border-color: #f59e0b;
   color: #d97706;
+  background: #fffbeb;
 }
 
 .badge-difficulty-hard {
   border-color: #ef4444;
   color: #dc2626;
+  background: #fef2f2;
 }
 
 .detail-title {
@@ -118,10 +131,12 @@
   gap: 0.5rem;
 }
 
+/* Tabs - Bordered Pill Style */
 .detail-tabs {
   display: flex;
   background: var(--gray-100);
-  border-radius: 10px;
+  border: 1px solid var(--gray-200);
+  border-radius: 50px;
   padding: 0.25rem;
   margin-bottom: 1.5rem;
 }
@@ -132,9 +147,9 @@
   border: none;
   background: transparent;
   color: var(--gray-500);
-  font-size: 0.9rem;
+  font-size: 0.875rem;
   font-weight: 500;
-  border-radius: 8px;
+  border-radius: 50px;
   transition: all 0.2s;
 }
 
@@ -145,9 +160,10 @@
 .tab-button.active {
   background: var(--white);
   color: var(--gray-900);
-  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--gray-200);
 }
 
+/* Content Cards */
 .section-card {
   background: var(--white);
   border-radius: 12px;
@@ -170,9 +186,19 @@
   font-size: 1.25rem;
 }
 
+.section-icon-lucide {
+  color: var(--primary-orange);
+}
+
+.video-icon {
+  color: var(--primary-orange);
+}
+
+/* Ingredients List */
 .ingredients-list {
   list-style: none;
   padding: 0;
+  margin: 0;
 }
 
 .ingredients-list li {
@@ -181,41 +207,61 @@
   margin-bottom: 0.75rem;
   color: var(--gray-700);
   font-size: 0.95rem;
+  line-height: 1.5;
 }
 
 .ingredients-list li::before {
   content: '';
   position: absolute;
   left: 0;
-  top: 0.5rem;
+  top: 0.55rem;
   width: 6px;
   height: 6px;
   background: var(--primary-orange);
   border-radius: 50%;
 }
 
-.instructions-list {
-  padding-left: 1.5rem;
-  margin: 0;
+/* Steps List - Numbered with Orange Circles */
+.steps-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
-.instructions-list li {
-  margin-bottom: 1rem;
-  color: var(--gray-700);
-  font-size: 0.95rem;
-  line-height: 1.6;
+.step-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
 }
 
-.instructions-list li::marker {
-  color: var(--primary-orange);
+.step-number {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  background: var(--primary-orange);
+  color: var(--white);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
   font-weight: 600;
 }
 
+.step-text {
+  color: var(--gray-700);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  padding-top: 0.25rem;
+}
+
+/* Tips Card - Always visible at bottom */
 .tips-card {
   background: #fef7ed;
   border-radius: 12px;
   padding: 1.5rem;
   border: 1px solid #fed7aa;
+  margin-top: 1.5rem;
 }
 
 .tips-title {
@@ -231,6 +277,7 @@
 .tips-list {
   list-style: none;
   padding: 0;
+  margin: 0;
 }
 
 .tips-list li {
@@ -239,6 +286,11 @@
   margin-bottom: 0.75rem;
   color: #c2410c;
   font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.tips-list li:last-child {
+  margin-bottom: 0;
 }
 
 .tips-list li::before {
@@ -252,12 +304,15 @@
   border-radius: 50%;
 }
 
+/* Video Tab */
 .video-placeholder {
   text-align: center;
   color: var(--gray-500);
   padding: 2rem;
+  font-size: 0.95rem;
 }
 
+/* Loading & Not Found States */
 .detail-loading,
 .detail-not-found {
   min-height: 100vh;
@@ -276,8 +331,15 @@
   border: none;
   border-radius: 8px;
   font-size: 0.95rem;
+  cursor: pointer;
+  transition: background 0.2s;
 }
 
+.detail-not-found button:hover {
+  background: var(--primary-orange-hover);
+}
+
+/* Responsive */
 @media (max-width: 768px) {
   .detail-main {
     padding: 0 1rem 2rem;
@@ -293,11 +355,18 @@
   }
 
   .detail-tabs {
-    flex-wrap: wrap;
+    border-radius: 12px;
   }
 
   .tab-button {
     font-size: 0.8rem;
-    padding: 0.6rem 0.75rem;
+    padding: 0.6rem 0.5rem;
+    border-radius: 10px;
+  }
+
+  .step-number {
+    width: 24px;
+    height: 24px;
+    font-size: 0.75rem;
   }
 }
