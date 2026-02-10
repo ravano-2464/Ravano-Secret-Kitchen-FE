@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
+import toast from 'react-hot-toast';
 
 interface UseLoginReturn {
   email: string;
@@ -45,6 +46,7 @@ export const useLogin = (): UseLoginReturn => {
       }
 
       login(data.token, data.user || { name: 'User', email }); 
+      toast.success('Login Berhasil');
 
     } catch (err: any) {
       setError(err.message || 'Terjadi kesalahan saat login');

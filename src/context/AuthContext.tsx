@@ -1,4 +1,5 @@
 import { createContext, useContext, useState, useEffect, type ReactNode } from 'react'; import { useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
 
 interface User {
     id: string;
@@ -48,6 +49,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         localStorage.removeItem('user');
         setToken(null);
         setUser(null);
+        toast.success('Logout Berhasil');
         navigate('/login');
     };
 

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
 
 interface UseRegisterReturn {
   name: string;
@@ -61,6 +62,7 @@ export const useRegister = (): UseRegisterReturn => {
         throw new Error(data.message || 'Registrasi gagal');
       }
 
+      toast.success('Registrasi Berhasil');
       navigate('/login');
     } catch (err: any) {
       setError(err.message || 'Terjadi kesalahan saat registrasi');
