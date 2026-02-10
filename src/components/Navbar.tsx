@@ -19,7 +19,7 @@ export const Navbar = () => {
                     <ChefHat size={24} />
                 </div>
                 <div className="navbar-text">
-                    <span className="navbar-title">Rahasia Dapur</span>
+                    <span className="navbar-title">Ravano Secret Kitchen</span>
                     <span className="navbar-subtitle">Selamat datang, <strong>{userName}</strong></span>
                 </div>
             </Link>

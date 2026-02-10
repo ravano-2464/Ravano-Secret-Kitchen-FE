@@ -22,7 +22,7 @@ export const LoginPage = () => {
                 </div>
 
                 <h1 className="auth-title">Selamat Datang</h1>
-                <p className="auth-subtitle">Login untuk melanjutkan ke Rahasia Dapur</p>
+                <p className="auth-subtitle">Login untuk melanjutkan ke Ravano Secret Kitchen</p>
 
                 {error && <div className="auth-error">{error}</div>}
 

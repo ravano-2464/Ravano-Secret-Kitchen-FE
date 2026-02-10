@@ -25,7 +25,7 @@ export const RegisterPage = () => {
                     <ChefHat size={28} />
                 </div>
 
-                <h1 className="auth-title">Rahasia Dapur</h1>
+                <h1 className="auth-title">Ravano Secret Kitchen</h1>
                 <p className="auth-subtitle">Daftar untuk mengakses ribuan resep masakan</p>
 
                 {error && <div className="auth-error">{error}</div>}
