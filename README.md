@@ -62,7 +62,7 @@ Buka http://localhost:5173 di browser Anda.
 ---
 
 ## 📁 Struktur Proyek
-
+```
 Frontend/
 ├── 📂 public/
 │   └── 📄 vite.svg              # Vite logo
@@ -117,6 +117,7 @@ Frontend/
 ├── 📄 tsconfig.app.json         # TypeScript app config
 ├── 📄 tsconfig.node.json        # TypeScript node config
 └── 📄 vite.config.ts            # Vite configuration
+```
 
 ---
 
