@@ -86,6 +86,32 @@
   color: var(--gray-400);
 }
 
+.password-wrapper {
+  position: relative;
+}
+
+.password-wrapper .form-input {
+  padding-right: 2.75rem;
+}
+
+.password-toggle {
+  position: absolute;
+  right: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: var(--gray-500);
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+
+.password-toggle:hover {
+  color: var(--gray-700);
+}
+
 .auth-button {
   width: 100%;
   padding: 0.875rem;

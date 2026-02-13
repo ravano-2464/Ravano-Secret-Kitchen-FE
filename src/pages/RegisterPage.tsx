@@ -1,5 +1,6 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ChefHat } from 'lucide-react';
+import { ChefHat, Eye, EyeOff } from 'lucide-react';
 import { useRegister } from '../hooks/useRegister';
 import './LoginPage.css';
 
@@ -17,6 +18,9 @@ export const RegisterPage = () => {
         setConfirmPassword,
         handleRegister,
     } = useRegister();
+
+    const [showPassword, setShowPassword] = useState(false);
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
     return (
         <div className="auth-page">
@@ -36,7 +40,7 @@ export const RegisterPage = () => {
                         <input
                             type="text"
                             className="form-input"
-                            placeholder="Ibu Siti"
+                            placeholder="Masukkan nama lengkap anda"
                             value={name}
                             onChange={(e) => setName(e.target.value)}
                         />
@@ -47,7 +51,7 @@ export const RegisterPage = () => {
                         <input
                             type="email"
                             className="form-input"
-                            placeholder="ibu.siti@email.com"
+                            placeholder="Masukkan email anda"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                         />
@@ -55,24 +59,42 @@ export const RegisterPage = () => {
 
                     <div className="form-group">
                         <label className="form-label">Password</label>
-                        <input
-                            type="password"
-                            className="form-input"
-                            placeholder="Minimal 6 karakter"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                        />
+                        <div className="password-wrapper">
+                            <input
+                                type={showPassword ? 'text' : 'password'}
+                                className="form-input"
+                                placeholder="Minimal 6 karakter"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                            />
+                            <button
+                                type="button"
+                                className="password-toggle"
+                                onClick={() => setShowPassword(!showPassword)}
+                            >
+                                {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                            </button>
+                        </div>
                     </div>
 
                     <div className="form-group">
                         <label className="form-label">Konfirmasi Password</label>
-                        <input
-                            type="password"
-                            className="form-input"
-                            placeholder="Ulangi password"
-                            value={confirmPassword}
-                            onChange={(e) => setConfirmPassword(e.target.value)}
-                        />
+                        <div className="password-wrapper">
+                            <input
+                                type={showConfirmPassword ? 'text' : 'password'}
+                                className="form-input"
+                                placeholder="Ulangi password"
+                                value={confirmPassword}
+                                onChange={(e) => setConfirmPassword(e.target.value)}
+                            />
+                            <button
+                                type="button"
+                                className="password-toggle"
+                                onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                            >
+                                {showConfirmPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                            </button>
+                        </div>
                     </div>
 
                     <button type="submit" className="auth-button" disabled={loading}>

@@ -6,6 +6,7 @@ import { HomePage } from './pages/HomePage';
 import { RecipeDetailPage } from './pages/RecipeDetailPage';
 import { AuthProvider } from './context/AuthContext';
 import { ProtectedRoute } from './components/ProtectedRoute';
+import { GuestRoute } from './components/GuestRoute';
 
 function App() {
   return (
@@ -13,8 +14,10 @@ function App() {
       <AuthProvider>
         <Toaster position="top-center" reverseOrder={false} toastOptions={{ duration: 5000 }} />
         <Routes>
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/register" element={<RegisterPage />} />
+          <Route element={<GuestRoute />}>
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/register" element={<RegisterPage />} />
+          </Route>
 
           <Route element={<ProtectedRoute />}>
             <Route path="/home" element={<HomePage />} />
