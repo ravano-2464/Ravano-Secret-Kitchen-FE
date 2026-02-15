@@ -62,62 +62,77 @@ Buka http://localhost:5173 di browser Anda.
 ---
 
 ## 📁 Struktur Proyek
+
 ```
 Frontend/
-├── 📂 public/
-│   └── 📄 vite.svg              # Vite logo
-├── 📂 src/
-│   ├── 📂 assets/               # Static assets
-│   │   └── 📄 react.svg         # React logo
-│   │
-│   ├── 📂 components/           # Reusable components
-│   │   ├── 📄 CategoryFilter.css
-│   │   ├── 📄 CategoryFilter.tsx # Filter kategori
-│   │   ├── 📄 Navbar.css
-│   │   ├── 📄 Navbar.tsx        # Navigation bar (sticky)
-│   │   ├── 📄 ProtectedRoute.tsx # Route guard untuk halaman privat
-│   │   ├── 📄 RecipeCard.css
-│   │   ├── 📄 RecipeCard.tsx    # Komponen kartu resep
-│   │   ├── 📄 SearchBar.css
-│   │   └── 📄 SearchBar.tsx     # Komponen pencarian
-│   │
-│   ├──📂 context/              # Context Providers
-│   │   └── 📄 AuthContext.tsx   # Authentication context & provider
-│   │
-│   ├── 📂 hooks/                # Custom React Hooks
-│   │   ├── 📄 useLogin.ts       # Logika login
-│   │   ├── 📄 useRecipeDetail.ts # Logika detail resep
-│   │   ├── 📄 useRecipes.ts     # Logika fetching resep
-│   │   └── 📄 useRegister.ts    # Logika registrasi
-│   │
-│   ├── 📂 pages/                # Halaman aplikasi
-│   │   ├── 📄 HomePage.css
-│   │   ├── 📄 HomePage.tsx      # Halaman utama
-│   │   ├── 📄 LoginPage.css
-│   │   ├── 📄 LoginPage.tsx     # Halaman login
-│   │   ├── 📄 RecipeDetailPage.css
-│   │   ├── 📄 RecipeDetailPage.tsx  # Halaman detail resep
-│   │   └── 📄 RegisterPage.tsx  # Halaman registrasi
-│   │
-│   ├── 📂 types/                # TypeScript Interfaces
-│   │   └── 📄 Recipe.ts         # Definisi tipe data Resep
-│   │
-│   ├── 📄 App.tsx               # Konfigurasi Routing
-│   ├── 📄 index.css             # Global styles
-│   ├── 📄 main.tsx              # Entry point aplikasi
-│   └── 📄 vite-env.d.ts         # Vite types
+├── 📂 public/                    # File statis yang langsung disajikan tanpa diproses
+│   └── 📄 vite.svg              #   Favicon / logo Vite default
 │
-├── 📄 .env                      # Environment variables
-├── 📄 .gitignore                # Git ignore rules
-├── 📄 eslint.config.js          # ESLint configuration
-├── 📄 index.html                # HTML entry point
-├── 📄 package.json              # Project dependencies & scripts
-├── 📄 package-lock.json         # Lock file dependencies
-├── 📄 tsconfig.json             # TypeScript root config
-├── 📄 tsconfig.app.json         # TypeScript app config
-├── 📄 tsconfig.node.json        # TypeScript node config
-└── 📄 vite.config.ts            # Vite configuration
+├── 📂 src/                       # Source code utama aplikasi
+│   ├── 📂 assets/               #   Asset statis (gambar, ikon, dll.)
+│   │   └── 📄 react.svg         #     Logo React untuk branding
+│   │
+│   ├── 📂 components/           #   Komponen UI yang dapat digunakan ulang
+│   │   ├── 📄 CategoryFilter.css #     Styling untuk filter kategori
+│   │   ├── 📄 CategoryFilter.tsx #     Komponen filter kategori resep (Masakan Utama, Berkuah, dll.)
+│   │   ├── 📄 GuestRoute.tsx    #     Route guard — redirect ke /home jika sudah login
+│   │   ├── 📄 Navbar.css        #     Styling untuk navigation bar
+│   │   ├── 📄 Navbar.tsx        #     Navigation bar sticky (logo, navigasi, tombol logout)
+│   │   ├── 📄 ProtectedRoute.tsx #    Route guard — redirect ke /login jika belum login
+│   │   ├── 📄 RecipeCard.css    #     Styling untuk kartu resep
+│   │   ├── 📄 RecipeCard.tsx    #     Komponen kartu resep (gambar, judul, deskripsi, kategori)
+│   │   ├── 📄 SearchBar.css    #      Styling untuk search bar
+│   │   └── 📄 SearchBar.tsx    #      Komponen pencarian resep dengan debounce
+│   │
+│   ├── 📂 context/              #   React Context untuk state management global
+│   │   └── 📄 AuthContext.tsx   #     Provider autentikasi (login state, token, user info)
+│   │
+│   ├── 📂 hooks/                #   Custom React Hooks (pemisahan logika bisnis dari UI)
+│   │   ├── 📄 useLogin.ts      #     Hook untuk logika login (validasi, API call, error handling)
+│   │   ├── 📄 useRecipeDetail.ts #   Hook untuk fetch & kelola detail resep berdasarkan ID
+│   │   ├── 📄 useRecipes.ts    #     Hook untuk fetch daftar resep, filter kategori, & pencarian
+│   │   └── 📄 useRegister.ts   #     Hook untuk logika registrasi (validasi, API call, error handling)
+│   │
+│   ├── 📂 pages/                #   Halaman-halaman utama aplikasi (setiap file = 1 route)
+│   │   ├── 📄 HomePage.css     #     Styling halaman utama
+│   │   ├── 📄 HomePage.tsx     #     Halaman utama — daftar resep dengan filter & pencarian
+│   │   ├── 📄 LoginPage.css    #     Styling halaman login
+│   │   ├── 📄 LoginPage.tsx    #     Halaman login — form email & password
+│   │   ├── 📄 RecipeDetailPage.css # Styling halaman detail resep
+│   │   ├── 📄 RecipeDetailPage.tsx # Halaman detail resep — tab Bahan, Cara Membuat, Tips
+│   │   └── 📄 RegisterPage.tsx #     Halaman registrasi — form nama, email, password, konfirmasi
+│   │
+│   ├── 📂 types/                #   TypeScript type definitions & interfaces
+│   │   └── 📄 Recipe.ts        #     Interface untuk tipe data Resep (id, nama, bahan, langkah, dll.)
+│   │
+│   ├── 📄 App.css               #   Styling khusus komponen App
+│   ├── 📄 App.tsx               #   Root komponen — konfigurasi routing (React Router)
+│   ├── 📄 index.css             #   Global styles (reset CSS, font, warna dasar)
+│   └── 📄 main.tsx              #   Entry point — render App ke DOM & wrap dengan AuthProvider
+│
+├── 📄 .env                      # Environment variables (VITE_API_URL untuk koneksi ke Backend)
+├── 📄 .gitignore                # Daftar file/folder yang diabaikan Git (node_modules, dist, .env)
+├── 📄 eslint.config.js          # Konfigurasi ESLint untuk linting & code quality
+├── 📄 index.html                # HTML entry point — Vite inject bundle JS di sini
+├── 📄 package.json              # Metadata project, dependencies, & script commands
+├── 📄 package-lock.json         # Lock file — memastikan versi dependency konsisten
+├── 📄 tsconfig.json             # TypeScript root config — referensi ke app & node config
+├── 📄 tsconfig.app.json         # TypeScript config untuk source code aplikasi (src/)
+├── 📄 tsconfig.node.json        # TypeScript config untuk file konfigurasi Node (vite.config.ts)
+└── 📄 vite.config.ts            # Konfigurasi Vite (plugins, server port, proxy, dll.)
 ```
+
+### 📖 Penjelasan Arsitektur Folder
+
+| Folder | Fungsi |
+|--------|--------|
+| `public/` | File statis yang disajikan langsung oleh Vite tanpa proses bundling. Cocok untuk favicon dan asset yang jarang berubah. |
+| `src/assets/` | Asset statis seperti gambar dan ikon yang di-import langsung di komponen. Vite akan mengoptimasi dan menambahkan hash pada build. |
+| `src/components/` | Komponen UI yang **reusable** dan bisa digunakan di berbagai halaman. Setiap komponen memiliki file `.tsx` (logic + JSX) dan `.css` (styling) yang terpisah. Termasuk route guards (`ProtectedRoute` & `GuestRoute`) untuk kontrol akses. |
+| `src/context/` | React Context API untuk **state management global**. `AuthContext` menyimpan informasi autentikasi (token, user data) yang bisa diakses dari seluruh komponen. |
+| `src/hooks/` | Custom Hooks yang memisahkan **business logic** dari UI. Pattern ini membuat komponen lebih bersih dan logika bisa di-test secara independen. |
+| `src/pages/` | Komponen halaman yang merepresentasikan **satu route** di aplikasi. Setiap halaman menggunakan komponen dari `components/` dan hook dari `hooks/`. |
+| `src/types/` | TypeScript interfaces dan type definitions untuk memastikan **type safety** di seluruh aplikasi. |
 
 ---
 
