@@ -5,7 +5,7 @@
 
 <!-- Animated Typing -->
 <a href="#">
-  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=22&pause=1000&color=FF6B6B&center=true&vCenter=true&repeat=true&width=600&lines=Ribuan+Resep+Masakan+Indonesia+🇮🇩;Rendang%2C+Nasi+Goreng%2C+Soto+Ayam+🍲;Dibuat+dengan+React+%2B+TypeScript+⚡;Lengkap+dengan+Tips+%26+Trik+👨‍🍳" alt="Typing SVG" />
+  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=22&duration=3000&pause=1000&color=FF6B6B&center=true&vCenter=true&repeat=true&width=600&height=40&lines=Ribuan+Resep+Masakan+Indonesia+%F0%9F%87%AE%F0%9F%87%A9;Rendang%2C+Nasi+Goreng%2C+Soto+Ayam+%F0%9F%8D%B2;Dibuat+dengan+React+%2B+TypeScript+%E2%9A%A1;Lengkap+dengan+Tips+dan+Trik+%F0%9F%91%A8%E2%80%8D%F0%9F%8D%B3" alt="Typing SVG" />
 </a>
 
 <br/>
